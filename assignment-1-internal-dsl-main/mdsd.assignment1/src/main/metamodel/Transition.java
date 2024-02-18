@@ -22,17 +22,17 @@ public class Transition {
 
 	public boolean hasSetOperation() {
 		// TODO Auto-generated method stub
-		return false;
+		return event.equals("SET");
 	}
 
 	public boolean hasIncrementOperation() {
 		// TODO Auto-generated method stub
-		return false;
+		return event.equals("INCREMENT");
 	}
 
 	public boolean hasDecrementOperation() {
 		// TODO Auto-generated method stub
-		return false;
+		return event.equals("DECREMENT");
 	}
 
 	public Object getOperationVariableName() {

@@ -3,7 +3,9 @@ package main;
 import main.metamodel.Machine;
 
 public class StateMachine {
-
+	
+	private Machine machine = new Machine();
+	
 	public Machine build() {
 		// TODO Auto-generated method stub
 		return null;
