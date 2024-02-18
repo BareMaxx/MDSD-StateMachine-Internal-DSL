@@ -4,75 +4,86 @@ public class Transition {
 	
 	private String event;
 	private State target;
+	private String conditional = "";
+	private String conditionalVariable = "";
+	private Integer conditionalValue = 0;
+	private String operation = "";
+	private String operationVariable = "";
 	
 	public Transition(String event, State target) {
 		this.event = event;
 		this.target = target;
 	}
 	
+	public Transition(String event, State target, String conditional, String conditionalVariable, Integer conditionalValue) {
+		this(event, target);
+		this.conditional = conditional;
+		this.conditionalValue = conditionalValue;
+		this.conditionalVariable = conditionalVariable;
+	}
+	
+	public Transition(String event, State target, String operation, String operationVariable) {
+		this(event, target);
+		this.operation = operation;
+		this.operationVariable = operationVariable; 
+	}
+	
+	public Transition(String event, State target, String operation, String operationVariable, String conditional, String conditionalVariable, Integer conditionalValue) {
+		this(event, target, conditional, conditionalVariable, conditionalValue);
+		this.operation = operation;
+		this.operationVariable = operationVariable;	
+	}
+	
 	public String getEvent() {
-		// TODO Auto-generated method stub
 		return this.event;
 	}
 
 	public State getTarget() {
-		// TODO Auto-generated method stub
 		return this.target;
 	}
 
+	public boolean hasOperation() {
+		return this.operation != "";
+	}
+	
 	public boolean hasSetOperation() {
-		// TODO Auto-generated method stub
-		return event.equals("SET");
+		return this.operation.equals("SET");
 	}
 
 	public boolean hasIncrementOperation() {
-		// TODO Auto-generated method stub
-		return event.equals("INCREMENT");
+		return this.operation.equals("INCREMENT");
 	}
 
 	public boolean hasDecrementOperation() {
-		// TODO Auto-generated method stub
-		return event.equals("DECREMENT");
+		return this.operation.equals("DECREMENT");
 	}
 
 	public Object getOperationVariableName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.operationVariable;
 	}
 
 	public boolean isConditional() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.conditional != "";
 	}
 
 	public Object getConditionVariableName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.conditionalVariable;
 	}
 
 	public Integer getConditionComparedValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.conditionalValue;
 	}
 
 	public boolean isConditionEqual() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.conditional.equals("EQUALS");
 	}
 
 	public boolean isConditionGreaterThan() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.conditional.equals("GREATER_THAN");
 	}
 
 	public boolean isConditionLessThan() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean hasOperation() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.conditional.equals("LESS_THAN");
 	}
 
 }
