@@ -2,14 +2,23 @@ package main.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class State {
 	
 	private String name;
 	private List<Transition> transitions = new ArrayList<>();
 	
-	public State(String name, List<Transition> transitions) {
+	public State(String name) {
 		this.name = name;
+	}
+	
+	public void addTransition(Transition transition) {
+		this.transitions.add(transition);
+		System.out.println("add");
+		System.out.println(this.name);
+		System.out.println(transition.getEvent());
+		System.out.println(this.transitions);
 	}
 
 	public String getName() {
@@ -21,6 +30,11 @@ public class State {
 	}
 
 	public Transition getTransitionByEvent(String string) {
-		return this.transitions.stream().filter(transition -> transition.getEvent().equals(string)).findFirst().get();
+		try {
+			return this.transitions.stream().filter(transition -> transition.getEvent().equals(string)).findFirst().get();
+		} catch (NoSuchElementException e) {
+			return new Transition("null");
+		}
+		
 	}
 }

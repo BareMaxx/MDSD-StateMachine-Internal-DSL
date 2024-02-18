@@ -9,41 +9,55 @@ public class Transition {
 	private Integer conditionalValue = 0;
 	private String operation = "";
 	private String operationVariable = "";
+	private Integer operationValue = 0;
+	private boolean isUsed = false;
 	
-	public Transition(String event, State target) {
+	public Transition(String event) {
 		this.event = event;
-		this.target = target;
-	}
-	
-	public Transition(String event, State target, String conditional, String conditionalVariable, Integer conditionalValue) {
-		this(event, target);
-		this.conditional = conditional;
-		this.conditionalValue = conditionalValue;
-		this.conditionalVariable = conditionalVariable;
-	}
-	
-	public Transition(String event, State target, String operation, String operationVariable) {
-		this(event, target);
-		this.operation = operation;
-		this.operationVariable = operationVariable; 
-	}
-	
-	public Transition(String event, State target, String operation, String operationVariable, String conditional, String conditionalVariable, Integer conditionalValue) {
-		this(event, target, conditional, conditionalVariable, conditionalValue);
-		this.operation = operation;
-		this.operationVariable = operationVariable;	
 	}
 	
 	public String getEvent() {
 		return this.event;
 	}
+	
+	public boolean getIsUsed() {
+		return isUsed;
+	}
+	
+	public void setIsUsed() {
+		this.isUsed = true;
+	}
 
 	public State getTarget() {
 		return this.target;
 	}
-
+	
+	public Transition setTarget(State target) {
+		this.target = target;
+		return this;
+	}
+	
+	public Transition setOperation(String operation) {
+		this.operation = operation;
+		return this;
+	}
+	
+	public Transition setOperationVariable(String operationVariable) {
+		this.operationVariable = operationVariable;
+		return this;
+	}
+	
+	public Transition setOperationValue(Integer value) {
+		this.operationValue = value;
+		return this;
+	}
+	
+	public Integer getOperationValue() {
+		return this.operationValue;
+	}
+	
 	public boolean hasOperation() {
-		return this.operation != "";
+		return !this.operation.equals("");
 	}
 	
 	public boolean hasSetOperation() {
@@ -58,15 +72,30 @@ public class Transition {
 		return this.operation.equals("DECREMENT");
 	}
 
-	public Object getOperationVariableName() {
+	public String getOperationVariableName() {
 		return this.operationVariable;
 	}
+	
+	public Transition setConditional(String conditional) {
+		this.conditional = conditional;
+		return this;
+	}
+	
+	public Transition setConditionalVariable(String conditionalVariable) {
+		this.conditionalVariable = conditionalVariable;
+		return this;
+	}
 
+	public Transition setConditionalValue(Integer value) {
+		this.conditionalValue = value;
+		return this;
+	}
+	
 	public boolean isConditional() {
 		return this.conditional != "";
 	}
 
-	public Object getConditionVariableName() {
+	public String getConditionVariableName() {
 		return this.conditionalVariable;
 	}
 

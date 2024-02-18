@@ -1,69 +1,98 @@
 package main;
 
 import main.metamodel.Machine;
+import main.metamodel.State;
+import main.metamodel.Transition;
 
 public class StateMachine {
 	
 	private Machine machine = new Machine();
+	private Transition currentTransition;
+	private State currentState;
 	
 	public Machine build() {
-		// TODO Auto-generated method stub
-		return null;
+		Machine currentMachine = this.machine;
+		this.machine = new Machine();
+		return currentMachine;
 	}
 
 	public StateMachine state(String string) {
-		// TODO Auto-generated method stub
-		return null;
+		State state = new State(string);
+		System.out.println("G");
+		System.out.println(state.getName());
+		this.currentState = this.machine.addState(state);
+		return this;
 	}
 
 	public StateMachine initial() {
-		// TODO Auto-generated method stub
-		return null;
+		this.machine.setInitialState(this.currentState);
+		return this;
 	}
 
 	public StateMachine when(String string) {
-		// TODO Auto-generated method stub
-		return null;
+		Transition transition = new Transition(string);
+		this.currentState.addTransition(transition);
+		this.currentTransition = transition;
+		return this;
 	}
 
 	public StateMachine to(String string) {
-		// TODO Auto-generated method stub
-		return null;
+		this.currentTransition
+		.setTarget(new State(string));
+		return this;
 	}
 
 	public StateMachine integer(String string) {
-		// TODO Auto-generated method stub
-		return null;
+		this.machine.addVariable(string);
+		return this;
 	}
 
 	public StateMachine set(String string, int i) {
-		// TODO Auto-generated method stub
-		return null;
+		this.currentTransition
+		.setOperation("SET")
+		.setOperationVariable(string)
+		.setOperationValue(i);
+		
+		return this;
 	}
 
 	public StateMachine increment(String string) {
-		// TODO Auto-generated method stub
-		return null;
+		this.currentTransition
+		.setOperation("INCREMENT")
+		.setOperationVariable(string);
+		
+		return this;
 	}
 
 	public StateMachine decrement(String string) {
-		// TODO Auto-generated method stub
-		return null;
+		this.currentTransition
+		.setOperation("DECREMENT")
+		.setOperationVariable(string);
+		return this;
 	}
 
 	public StateMachine ifEquals(String string, int i) {
-		// TODO Auto-generated method stub
-		return null;
+		this.currentTransition
+		.setConditional("EQUALS")
+		.setConditionalVariable(string)
+		.setConditionalValue(i);
+		return this;
 	}
 
 	public StateMachine ifGreaterThan(String string, int i) {
-		// TODO Auto-generated method stub
-		return null;
+		this.currentTransition
+		.setConditional("GREATER_THAN")
+		.setConditionalVariable(string)
+		.setConditionalValue(i);
+		return this;
 	}
 
 	public StateMachine ifLessThan(String string, int i) {
-		// TODO Auto-generated method stub
-		return null;
+		this.currentTransition
+		.setConditional("LESS_THAN")
+		.setConditionalVariable(string)
+		.setConditionalValue(i);
+		return this;
 	}
 
 }
