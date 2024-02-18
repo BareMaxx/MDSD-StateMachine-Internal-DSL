@@ -18,8 +18,6 @@ public class StateMachine {
 
 	public StateMachine state(String string) {
 		State state = new State(string);
-		System.out.println("G");
-		System.out.println(state.getName());
 		this.currentState = this.machine.addState(state);
 		return this;
 	}

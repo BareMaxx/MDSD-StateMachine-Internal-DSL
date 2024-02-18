@@ -29,7 +29,6 @@ public class MachineInterpreter {
     		if(i > 0 && !this.machine.getCurrentState().getName().equals(currentStateState.getName())) {
     			break;
     		}
-			System.out.println("GetCurrentState" + this.machine.getCurrentState().getName());
             boolean continueProcess = false;
             if(!t.getEvent().equals("null")) {
             	if(t.isConditional()) {
@@ -40,8 +39,6 @@ public class MachineInterpreter {
                 	} else if (t.isConditionGreaterThan()) {
                 		continueProcess = machineValue > operationValue;
                 	} else if (t.isConditionLessThan()) {
-                    	System.out.println("machine"+machineValue);
-                    	System.out.println("operation"+operationValue);
                 		continueProcess = machineValue < operationValue;
                 	}
                 } else {
@@ -49,16 +46,12 @@ public class MachineInterpreter {
                 }
                 
                 if(t.hasOperation() && continueProcess) {
-                	System.out.println("continue"+continueProcess);
                 	if(t.hasDecrementOperation()) {
                 		int value = this.machine.getInteger(t.getOperationVariableName());
-                		System.out.println(value);
                 		value = value - 1;
-                		System.out.println(value);
                 		
                 		this.machine.setVariable(t.getOperationVariableName(), value);
                 	} else if (t.hasIncrementOperation()) {
-                		System.out.println("hello");
                 		int value = this.machine.getInteger(t.getOperationVariableName());
                 		value = value + 1;
                 		
@@ -67,9 +60,6 @@ public class MachineInterpreter {
                 		this.machine.setVariable(t.getOperationVariableName(), t.getOperationValue());
                 	}
                 }
-                
-                System.out.println("Target"+t.getTarget().getName());
-                System.out.println(this.machine.getStates());
                 if(continueProcess) this.machine.setCurrentState(this.machine.getState(t.getTarget().getName()));
             }
 		}

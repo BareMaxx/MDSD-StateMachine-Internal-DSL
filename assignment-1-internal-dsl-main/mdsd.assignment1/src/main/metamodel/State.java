@@ -15,10 +15,6 @@ public class State {
 	
 	public void addTransition(Transition transition) {
 		this.transitions.add(transition);
-		System.out.println("add");
-		System.out.println(this.name);
-		System.out.println(transition.getEvent());
-		System.out.println(this.transitions);
 	}
 
 	public String getName() {
