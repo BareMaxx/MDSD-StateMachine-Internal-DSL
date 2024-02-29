@@ -1,0 +1,13 @@
+grammar org.baremaxx.test.Testlanguage with org.eclipse.xtext.common.Terminals
+
+generate testlanguage "http://www.baremaxx.org/test/Testlanguage"
+
+EntityRoot:
+	'system' name=ID (Entity | Relation)*;
+	
+Entity: 'entity' ID Attribute*;
+Attribute: 'attribute' ID 'as' Type;
+Type: 'string' | 'number';
+Relation: Inheritance | Association;
+Inheritance: 'relation' ID 'is' ID;
+Association: ('many')? ID ('have' | 'has')? ('many')? ID;
